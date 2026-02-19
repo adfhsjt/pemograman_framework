@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-// Tambahan Langkah 4 gabung sama commit Langkah 3
+// Tambahan Langkah 4. Dynamic Routing gabung sama commit Langkah 3
 
 const HalamanProduk = () => {
     // const Router = useRouter();

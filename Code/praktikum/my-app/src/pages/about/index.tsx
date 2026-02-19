@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <div>
-      <h1>Ini Adalah Halaman About</h1> <br />
+      <h1>Ini Adalah Halaman About</h1>
       {/* <p>Ini adalah halaman About</p> */}
       {/* <p>Nama: Ahmad Dzul Fadhli Hannan</p> */}
       {/* <p>NIM: 2341720106</p> */}

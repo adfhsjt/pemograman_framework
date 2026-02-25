@@ -1,4 +1,7 @@
+import { useRouter } from "next/router";
 import Navbar from "../navbar";
+
+const disableNavbar = ['/auth/login', '/auth/register'];
 
 type AppShellProps = {
     children: React.ReactNode;
@@ -6,13 +9,14 @@ type AppShellProps = {
 
 const AppShell = (props:AppShellProps) => {
     const {children} = props;
+    const {pathname} = useRouter();
+    // Insight: Gunakan router.pathname jika ada query parameter untuk memastikan path yang tepat
+    // const router = useRouter();
+    // console.log(router);
     return (
         <main>
-            <Navbar />
+            {!disableNavbar.includes(pathname) && <Navbar />}
             {children}
-            <div>
-                footer
-            </div>
         </main>
     );
 };

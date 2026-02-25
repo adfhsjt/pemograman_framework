@@ -6,7 +6,7 @@ const produk = () => {
     const {push} = useRouter();
     useEffect(() => {
         if(!isLogin){
-            push("/auth/login");
+            push("/auth/login");    {/*Terapkan redirect otomatis ke login jika user belum login.*/}
         }
     }, []);
     return (

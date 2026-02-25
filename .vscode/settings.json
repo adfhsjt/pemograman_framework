@@ -4,5 +4,8 @@
     "codesnap.transparentBackground": false,
     "codesnap.showWindowTitle": true,
     "codesnap.realLineNumbers": true,
-    "codesnap.backgroundColor": "#ffffff"
+    "codesnap.backgroundColor": "#ffffff",
+    "codesnap.showWindowControls": true,
+    "codesnap.target": "container",
+    "codesnap.shutterAction": "copy"
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import styles from "./register.module.css";
-// import styles from "./register.module.scss";
+// import styles from "./register.module.css";
+import styles from "./register.module.scss";
 
 const TampilanRegister = () => {
     const {push} = useRouter();
@@ -11,6 +11,10 @@ const TampilanRegister = () => {
     }
     return (
         <div className={styles.register}>
+            <head>
+                <title>Sign up</title>
+            </head>
+            <img src="/sign-up.svg" alt="register" className={styles.register__image} />
             <h1 className="text-3xl font-bold text-green-600 ">Halaman Register</h1>
             <button onClick={handlerRegister}>Register</button> <br />
             {/* Inline Styling (CSS-in-JS) */}

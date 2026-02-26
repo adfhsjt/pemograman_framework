@@ -7,4 +7,8 @@
     align-items: center;
     height: 100vh;
     background-color: map-get($map: $schema, $key: color-secondary);
+
+    &__image{
+        width: 200px;
+    }
 }

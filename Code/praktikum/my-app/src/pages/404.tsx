@@ -1,4 +1,5 @@
 import styles from "@/styles/404.module.scss";
+import Link from "next/dist/client/link";
 const Custom404 = () => {
     return (
         <div className={styles.error}>
@@ -10,7 +11,7 @@ const Custom404 = () => {
                 Halaman Tidak Ditemukan
             </h2>
             <p className={styles.error__desc}>Maaf, halaman yang Anda cari tidak ditemukan.</p>
-            <a href="/" className={styles.error_button}></a>
+            <Link href="/" className={styles.error__button}>Kembali ke Home</Link>
         </div>
     );
 };

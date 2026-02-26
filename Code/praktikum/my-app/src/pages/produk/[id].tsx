@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import TampilanProduk from "../views/produk";
 
 // Tambahan Langkah 4. Dynamic Routing gabung sama commit Langkah 3
 
@@ -8,8 +9,7 @@ const HalamanProduk = () => {
     const { query } = useRouter();
     return (
         <div>
-            <h1>Halaman Produk</h1>
-            <p>Produk: {query.id}</p>
+            <TampilanProduk productId={query.id} />
         </div>
     );
 };

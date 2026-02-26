@@ -1,5 +1,6 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { useEffect, useState } from "react";
+import TampilanProduk from "../views/produk";
 
 const produk = () => {
     // const [isLogin, setsLogin] = useState(false);
@@ -11,7 +12,7 @@ const produk = () => {
     // }, []);
     return (
         <div>
-            Produk Page
+            <TampilanProduk />
         </div>
     );
 };

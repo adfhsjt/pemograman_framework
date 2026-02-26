@@ -1,11 +1,15 @@
 import styles from "./produk.module.css";
 const TampilanMainProduk = ({ productId }: { productId?: string | string[] }) => {
     return (
-        <main className="main-section">
+        <main className="flex justify-center items-center py-10">
             {productId ? (
-                <p className={styles.produk}>Produk: {productId}</p>
-            ) : (
-                <p className={styles.produk}>Pilih produk.</p>
+                <p className="text-lg font-medium bg-white px-6 py-3 rounded-lg shadow">
+                    Produk: {productId}
+                </p>
+            ) : (   
+                <p className="text-lg text-gray-500">
+                    Pilih produk.
+                </p>
             )}
         </main>
     );

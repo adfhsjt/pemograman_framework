@@ -1,8 +1,8 @@
-import styles from "./produk.module.css";
+// import styles from "./produk.module.css";
 
 const TampilanHeroProduk = () => {
     return (
-        <div className={styles.hero}>
+        <div className="bg-gray-100 p-5 text-center text-2xl font-bold">
             Produk Page
         </div>
     );

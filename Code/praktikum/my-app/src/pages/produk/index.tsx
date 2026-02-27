@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 type ProductType = {
     id: string;
     name: string;
-    harga: number;
-    ukuran: string;
-    warna: string;
+    price: number;
+    size: string;
 }
 const kategori = () => {
     // const [isLogin, setsLogin] = useState(false);
@@ -34,9 +33,8 @@ const kategori = () => {
             {products.map((product: ProductType) => (
                 <div key={product.id}>
                     <h2 className="text-xl font-semibold">{product.name}</h2>
-                    <p>{product.harga}</p>
-                    <p>{product.ukuran}</p>
-                    <p>{product.warna}</p>
+                    <p>{product.price}</p>
+                    <p>{product.size}</p>
                 </div>  
             ))}
         </div>

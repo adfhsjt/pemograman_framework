@@ -8,6 +8,7 @@ const kategori = () => {
     // const [isLogin, setsLogin] = useState(false);
     // const {push} = useRouter();
     const [products, setProducts] = useState([]);
+    // Menggunakan SWR 
     const {data, error, isLoading} = useSWR("/api/produk", fetcher);
     
     // cek apakah data, error, atau isLoading sudah benar
@@ -17,7 +18,7 @@ const kategori = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <TampilanProduk products={isLoading ? [] : data.data} />
+            <TampilanProduk products={data?.data || []} isLoading={isLoading} />
         </div>
     );
 };

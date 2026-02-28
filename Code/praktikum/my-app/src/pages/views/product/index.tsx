@@ -12,7 +12,7 @@ const TampilanProduk = ({ products, isLoading }: { products: ProductType[], isLo
         <div className={styles.produk}>
             <h1 className={styles.produk__title}>Daftar Produk</h1>
             <div className={styles.produk__content}>
-                {isLoading ? (
+                {!isLoading ? (
                     <>
                         {products.map((product: ProductType) => (
                             <div className={styles.produk__content__item} key={product.id}>

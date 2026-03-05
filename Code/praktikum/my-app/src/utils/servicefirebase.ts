@@ -11,3 +11,12 @@ export async function retrieveProducts(collectionName: string) {
     }));
     return data;
 }
+
+export async function retrieveLapars(collectionName: string) {
+    const snapshot = await getDocs(collection(db, collectionName));
+    const data = snapshot.docs.map((doc)=>({
+        id: doc.id,
+        ...doc.data()
+    }));
+    return data;
+}

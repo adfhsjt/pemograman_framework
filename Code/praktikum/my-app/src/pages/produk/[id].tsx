@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import TampilanProduk from "../views/produk";
+import TampilanProduk from "../../views/produk";
 
 // Tambahan Langkah 4. Dynamic Routing gabung sama commit Langkah 3
 

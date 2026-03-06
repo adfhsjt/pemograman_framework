@@ -1,4 +1,5 @@
 import styles from "../../pages/produk/produk.module.scss";
+import Link from "next/link";
 type ProductType = {
     id: string;
     name: string;
@@ -14,13 +15,16 @@ const TampilanProduk = ({ products, isLoading = false }: { products: ProductType
             <div className={styles.produk__content}>
                 {!isLoading ? (
                     <>
-                        {products.map((product: ProductType) => (
-                            <div className={styles.produk__content__item} key={product.id}>
-                                <img src={product.image} alt={product.name} className={styles.produk__content__item__image} />
-                                <h2 className={styles.produk__content__item__name}>Nama: {product.name}</h2>
-                                <p className={styles.produk__content__item__price}>Harga: {product.price}</p>
-                                <p className={styles.produk__content__item__category}>Kategori: {product.category}</p>
+                        {products.map((products: ProductType) => (
+                            <Link href={`/produk/${products.id}`} key={products.id} className={styles.produk__content__item}>
+
+                            <div className={styles.produk__content__item} key={products.id}>
+                                <img src={products.image} alt={products.name} className={styles.produk__content__item__image} />
+                                <h2 className={styles.produk__content__item__name}>Nama: {products.name}</h2>
+                                <p className={styles.produk__content__item__price}>Harga: Rp. {products.price.toLocaleString("id-ID")}</p>
+                                <p className={styles.produk__content__item__category}>Kategori: {products.category}</p>
                             </div>
+                            </Link>
                         ))}
                     </>
                 ) : (

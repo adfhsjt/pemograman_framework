@@ -30,7 +30,7 @@ export default HalamanProduk;
 export async function getServerSideProps({params}: {params: {produk: string}}) {
     const res = await fetch(`http://localhost:3000/api/products/${params?.produk}`);
     const response = await res.json();
-    console.log("Data produk yang diambil dari API:", response);
+    // console.log("Data produk yang diambil dari API:", response);
     return {
         props: {
             product: response.data, //Pastikan untuk memberikan nilai default jika data tidak tersedia

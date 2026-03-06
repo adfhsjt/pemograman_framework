@@ -14,7 +14,7 @@ const halamanLaparStatic = (props:{lapars:LaparType[]}) => {
 export default halamanLaparStatic;
 
 export async function getStaticProps(){
-    const res = await fetch('http://127.0.0.1:3001/api/lapar');
+    const res = await fetch('http://127.0.0.1:3000/api/lapar');
     // const response: LaparType[] = await res.json();
     const response: { data: LaparType[] } = await res.json();
 

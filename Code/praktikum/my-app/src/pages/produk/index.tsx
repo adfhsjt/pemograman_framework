@@ -9,7 +9,7 @@ const kategori = () => {
     // const {push} = useRouter();
     const [products, setProducts] = useState([]);
     // Menggunakan SWR 
-    const {data, error, isLoading} = useSWR("http://localhost:3001/api/produk", fetcher);
+    const {data, error, isLoading} = useSWR("http://localhost:3000/api/produk", fetcher);
     
     // cek apakah data, error, atau isLoading sudah benar
     console.log("Data:", data);

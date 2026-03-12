@@ -1,11 +1,17 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import TampilanProduk from "../../views/product";
 import useSWR from "swr";
 import fetcher from "../../utils/swr/fetcher";
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const kategori = () => {
-    // const [isLogin, setsLogin] = useState(false);
+    const [isLogin, setsLogin] = useState(false);
+    useEffect(() => {
+        // Redirect ke halaman login jika belum login
+        if (!isLogin) {
+            window.location.href = "/auth/login";
+        }
+    }, [isLogin]);
     const {push} = useRouter();
     const [products, setProducts] = useState([]);
     // Menggunakan SWR 

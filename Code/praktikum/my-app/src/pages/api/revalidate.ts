@@ -17,9 +17,13 @@ export default async function handler(
     });
   }
 
-  if (req.query.data === "produk") {
+  const data = req.query.data;
+
+  if (data === "produk" || data === "lapar") {
+    const path = data === "produk" ? "/produk/static" : "/lapar/static";
+
     try {
-      await res.revalidate("/produk/static");
+      await res.revalidate(path);
       return res.status(200).json({ revalidate: true });
     } catch (error) {
       console.error("Error in API route:", error);
@@ -29,6 +33,6 @@ export default async function handler(
 
   return res.json({
     revalidate: false,
-    message: "Invalid query parameter. Expected 'data=produk'.",
+    message: "Invalid query parameter. Expected 'data=produk' or 'data=lapar'.",
   });
 }

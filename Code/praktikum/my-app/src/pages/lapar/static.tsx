@@ -22,6 +22,7 @@ export async function getStaticProps(){
     return {
         props: {
             lapars: response.data
-        }
+        },
+        revalidate: 10,
     }
 }

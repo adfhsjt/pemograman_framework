@@ -1,28 +1,35 @@
-import syles from "./navbar.module.css";
+import styles from "./navbar.module.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
-    const { data } = useSession();
+    const { data }:any = useSession();
     // const {data: session} = useSession();
     // console.log("session:", session);
     return (
-        <div className={syles.navbar}>
-            <div className="big">
-                Navbar Component
+        <div className={styles.navbar}>
+            <div className={styles.navbar__brand}>
+                MyApp
             </div>
-            {data ?(
-            <button
-                className="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300"
-                onClick={() => signOut()}>
-                Sign Out
-            </button>
-            ):(
-                <button
-                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                onClick={() => signIn()}>
-                Sign In
-            </button>
-            )}
+            <div className={styles.navbar__right}>
+                {data ? (
+                    <>
+                    <div className={styles.navbar__user}>
+                        Welcome, {data.user?.fullname}
+                    </div>
+                    <button
+                        className={`${styles.navbar__button} ${styles["navbar__button--danger"]}`}
+                        onClick={() => signOut()}>
+                        Sign Out
+                    </button>
+                    </>
+                ) : (
+                    <button
+                        className={`${styles.navbar__button} ${styles["navbar__button--primary"]}`}
+                        onClick={() => signIn()}>
+                        Sign In
+                    </button>
+                )}
+            </div>
         </div>
     );
 };

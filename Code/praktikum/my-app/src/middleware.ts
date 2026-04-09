@@ -20,6 +20,6 @@ export const config = {
     "/about",
     "/lapar",
     "/profil",
-    "/admin/",  
+    "/admin",
   ],
 };

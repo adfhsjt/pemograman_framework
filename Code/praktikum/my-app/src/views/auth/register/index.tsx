@@ -10,7 +10,7 @@ const TampilanRegister = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setError("");
         setIsLoading(true);
-        event?.preventDefault();
+        event.preventDefault();
         const form = event.currentTarget;
         const formData = new FormData(event.currentTarget);
         const email = formData.get("email") as string;
@@ -54,7 +54,7 @@ const TampilanRegister = () => {
     };
     return (
         <div className={style.register}>
-            {error && <p className={style.register__error}>{error}</p>} /* Pesan ERROR */
+            {error && <p className={style.register__error}>{error}</p>} {/* Pesan ERROR */}
             <h1 className={style.register__title}>Halaman Register</h1>
             <div className={style.register__form}>
                 <form onSubmit={handleSubmit}>

@@ -11,7 +11,7 @@ export default async function handler(
 ) {
     if(req.method === "POST"){
         await signUp(req.body, (result: {status: string, message: string}) => {
-            if(result.status){
+            if(result.status === "success"){
                 res.status(200).json({ name: result.message, alamat: "" });
             } else {
                 res.status(400).json({ name: result.message, alamat: "" });

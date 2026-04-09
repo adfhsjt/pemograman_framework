@@ -10,6 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import app from "../firebase";
+import bcrypt from "bcrypt";
 
 const db = getFirestore(app);
 
@@ -42,6 +43,7 @@ export async function signUp(
     email: string;
     fullname: string;
     password: string;
+    role?: string;
   },
   callback: Function,
 ) {
@@ -54,19 +56,31 @@ export async function signUp(
     id: doc.id,
     ...doc.data(),
   }));
-  // console.log("Query result:", data);
+  //   console.log("Query result:", data);
+  // console.log(data.length < 0);
+  // console.log(data.length > 0);
   if (data.length > 0) {
-    // user belum ada -> boleh daftar
-    // await addDoc(collection(db, "users"), userData);
-    // console.log("User registered:", data);
+    // user sudah ada
+    return callback({
+      status: "error",
+      message: "User already exists",
+    });
+  }
+
+  try {
+    userData.password = await bcrypt.hash(userData.password, 10);
+    userData.role = "user";
+
+    await addDoc(collection(db, "users"), userData);
+
     callback({
       status: "success",
       message: "User registered successfully",
     });
-  } else {
+  } catch (error) {
     callback({
       status: "error",
-      message: "User already exists",
+      message: "Failed to register user",
     });
   }
 }

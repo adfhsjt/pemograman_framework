@@ -8,12 +8,14 @@ const TampilanRegister = () => {
     const { push } = useRouter();
     const [error, setError] = useState("");
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        setError("");
+        setIsLoading(true);
         event?.preventDefault();
         const form = event.currentTarget;
         const formData = new FormData(event.currentTarget);
         const email = formData.get("email") as string;
-        const fullname = formData.get("FullName") as string;
-        const password = formData.get("Password") as string;
+        const fullname = formData.get("fullname") as string;
+        const password = formData.get("password") as string;
         const response = await fetch("/api/register", {
             method: "POST",
             headers: {
@@ -27,20 +29,22 @@ const TampilanRegister = () => {
         });
         // const result = await response.json();
         // console.log(result);
+        console.log("Response status:", response.status);
         if (response.status === 200) {
             form.reset();
             // event.currentTarget.reset();
             setIsLoading(false);
             push("/auth/login");
-        }else{
+        } else {
             setIsLoading(false);
             setError(
-                response.status === 400 ? "User already exist" : "An error occured",
+                response.status === 400 ? "Email already exist" : "An error occured",
             );
         }
     };
     return (
         <div className={style.register}>
+            {error && <p className={style.register__error}>{error}</p>}
             <h1 className={style.register__title}>Halaman Register</h1>
             <div className={style.register__form}>
                 <form onSubmit={handleSubmit}>
@@ -63,16 +67,16 @@ const TampilanRegister = () => {
                     {/* Full Name */}
                     <div className={style.register__form__item}>
                         <label
-                            htmlFor="fullName"
+                            htmlFor="fullname"
                             className={style.register__form__item__label}
                         >
-                            FullName
+                            Full Name
                         </label>
                         <input
                             type="text"
-                            id="fullName"
-                            name="fullName"
-                            placeholder="FullName"
+                            id="fullname"
+                            name="fullname"
+                            placeholder="Full Name"
                             className={style.register__form__item__input}
                         />
                     </div>
@@ -93,8 +97,12 @@ const TampilanRegister = () => {
                         />
                     </div>
                     {/* Button Register */}
-                    <button type="submit" className={style.register__form__item__button}>
-                        Register
+                    <button
+                        type="submit"
+                        className={style.register__form__item__button}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? "Loading..." : "Register"}
                     </button>
                 </form>
                 <br />

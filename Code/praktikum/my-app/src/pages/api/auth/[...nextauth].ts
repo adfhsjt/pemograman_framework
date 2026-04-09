@@ -2,6 +2,8 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signIn } from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
+import GoogleProvider from "next-auth/providers/google";
+import Google from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -38,6 +40,10 @@ export const authOptions: NextAuthOptions = {
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
   ],
 
   callbacks: {
@@ -48,6 +54,20 @@ export const authOptions: NextAuthOptions = {
         token.role = user.role;
       }
       // console.log("jwt callback", {token, account, profile, user});
+      // Jika login dengan Google, tambahkan informasi yang diperlukan ke token
+      if (account?.provider === "google") {
+        const data = {
+          fullname: user?.name,
+          email: user?.email,
+          image: user?.image,
+          type: account.provider,
+        }
+        // console.log("Google login data:", { data });
+        token.fullname = data.fullname;
+        token.email = data.email;
+        token.image = data.image;
+        token.type = data.type;
+      }
       return token;
     },
     async session({ session, token }: any) {
@@ -57,8 +77,14 @@ export const authOptions: NextAuthOptions = {
       if (token.fullname) {
         session.user.fullname = token.fullname;
       }
+      if (token.image) {
+        session.user.image = token.image;
+      }
       if (token.role) {
         session.user.role = token.role;
+      }
+      if (token.type) {
+        session.user.type = token.type;
       }
       // console.log("session callback", {session, token});
       return session;

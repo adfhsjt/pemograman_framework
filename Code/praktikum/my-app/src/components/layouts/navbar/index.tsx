@@ -5,6 +5,7 @@ const Navbar = () => {
     const { data }: any = useSession();
     // const {data: session} = useSession();
     // console.log("session:", session);
+    // console.log(data.user.image);
     return (
         <div className={styles.navbar}>
             <div className={styles.navbar__brand}>

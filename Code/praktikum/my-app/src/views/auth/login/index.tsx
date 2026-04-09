@@ -30,6 +30,7 @@ const TampilanLogin = () => {
                 push("/");
             } else {
                 setIsLoading(false);
+                // console.log("Login error:", res.error);
                 setError(res?.error || "Login failed");
             }
         } catch (error) {

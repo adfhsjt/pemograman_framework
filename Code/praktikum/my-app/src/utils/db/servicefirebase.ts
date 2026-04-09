@@ -69,7 +69,7 @@ export async function signUp(
 
   try {
     userData.password = await bcrypt.hash(userData.password, 10);
-    userData.role = "user";
+    userData.role = "member";
 
     await addDoc(collection(db, "users"), userData);
 

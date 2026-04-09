@@ -1,7 +1,7 @@
 import { ProductType } from '../../types/Product.type';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { retrieveDataById, retrieveProducts } from "../../utils/servicefirebase";
+import { retrieveDataById, retrieveProducts } from "../../utils/db/servicefirebase";
 type Data = {
   status: boolean;
   status_code: number;

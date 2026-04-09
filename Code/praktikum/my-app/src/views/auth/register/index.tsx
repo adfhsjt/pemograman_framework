@@ -1,25 +1,70 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-// import styles from "./register.module.css";
-import styles from "./register.module.scss";
+import style from "../../auth/register/register.module.scss";
 
 const TampilanRegister = () => {
-    const {push} = useRouter();
-    const handlerRegister = () => {
-        // logic login disini
-        push("/produk");         {/* Login → Product (imperatif) */}
-    }
     return (
-        <div className={styles.register}>
-            <head>
-                <title>Sign up</title>
-            </head>
-            <img src="/sign-up.svg" alt="register" className={styles.register__image} />
-            <h1 className="text-3xl font-bold text-green-600 ">Halaman Register</h1>
-            <button onClick={handlerRegister}>Register</button> <br />
-            {/* Inline Styling (CSS-in-JS) */}
-            <h1 style={{ color: "red",border: "1px solid red", borderRadius: "10px",padding: "10px",}}>Sudah Punya Akun</h1>
-            <Link href={"/auth/login"}>Ke Halaman Login</Link>
+        <div className={style.register}>
+            <h1 className={style.register__title}>Halaman Register</h1>
+            <div className={style.register__form}>
+                <form action="">
+                    {/* Email */}
+                    <div className={style.register__form__item}>
+                        <label
+                            htmlFor="email"
+                            className={style.register__form__item__label}
+                        >
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            className={style.register__form__item__input}
+                        />
+                    </div>
+                    {/* Full Name */}
+                    <div className={style.register__form__item}>
+                        <label
+                            htmlFor="fullName"
+                            className={style.register__form__item__label}
+                        >
+                            FullName
+                        </label>
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="FullName"
+                            className={style.register__form__item__input}
+                        />
+                    </div>
+                    {/* Password */}
+                    <div className={style.register__form__item}>
+                        <label
+                            htmlFor="password"
+                            className={style.register__form__item__label}
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Password"
+                            className={style.register__form__item__input}
+                        />
+                    </div>
+                    {/* Button Register */}
+                    <button type="submit" className={style.register__form__item__button}>
+                        Register
+                    </button>
+                </form>
+                <br />
+                <p className={style.register__form__item__text}>
+                    Sudah punya akun? <Link href="/auth/login">Ke Halaman Login</Link>
+                </p>
+            </div>
         </div>
     );
 };

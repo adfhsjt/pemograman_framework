@@ -1,54 +1,62 @@
 .error {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
 
-    background: linear-gradient(135deg, #9b9de9, #8b5cf6);
-    color: white;
-    padding: 20px;
+  background: linear-gradient(135deg, #676aee, #8b5cf6);
+  color: #fff;
+  padding: 24px;
 
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
-    &__image {
-        width: 280px;
-        margin-bottom: 30px;
-        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  &__image {
+    width: 220px;
+    opacity: 0.95;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  &__subtitle {
+    font-size: 22px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  &__desc {
+    font-size: 16px;
+    max-width: 360px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &__button {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: #fff;
+      color: #6366f1;
+      transform: translateY(-2px);
     }
-
-    &__title {
-        font-size: 64px;
-        font-weight: 800;
-        margin-bottom: 10px;
-    }
-
-    &__subtitle {
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-
-    &__desc {
-        font-size: 18px;
-        max-width: 400px;
-        margin-bottom: 25px;
-        color: #e0e7ff;
-    }
-
-    &__button {
-        background: white;
-        color: #6366f1;
-        padding: 12px 24px;
-        border-radius: 12px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-
-        &:hover {
-            background: #e0e7ff;
-            transform: translateY(-2px);
-        }
-    }
+  }
 }

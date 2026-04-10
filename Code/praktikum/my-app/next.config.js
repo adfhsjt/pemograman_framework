@@ -8,11 +8,19 @@ const nextConfig = {
         hostname: 'assets.adidas.com',
         port: "",
         pathname: "/**",
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: "",
+        pathname: "/**",
       }
-    ],
-    domains: [
-      'avatars.githubusercontent.com',
-      'lh3.googleusercontent.com',
     ],
   },
 }

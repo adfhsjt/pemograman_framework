@@ -2,7 +2,6 @@ import {
   getFirestore,
   collection,
   getDocs,
-  Firestore,
   getDoc,
   doc,
   query,
@@ -100,43 +99,41 @@ export async function signUp(
   }
 }
 
-export async function signInWithGoogle(userData: any, callback: any) {
-  try {
-    const q = query(
-      collection(db, "users"),
-      where("email", "==", userData.email),
-    );
-
-    const querySnapshot = await getDocs(q);
-    const data: any = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    if (data.length > 0) {
-      // User sudah ada, update data
-      userData.role = data[0].role;
-      await updateDoc(doc(db, "users", data[0].id), userData);
-      callback({
-        status: true,
-        message: "User registered and logged in with Google",
-        data: userData,
-      });
-    } else {
-      // User belum ada, buat data baru
-      userData.role = "member";
-      await addDoc(collection(db, "users"), userData);
-      callback({
-        status: true,
-        message: "User registered and logged in with Google",
-        data: userData,
-      });
+export async function signInWithOAuth(provider: string, userData: any, callback: any) {
+    try {
+        const q = query(
+            collection(db, "users"),
+            where("email", "==", userData.email),
+        );
+        const querySnapshot = await getDocs(q);
+        const data: any = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        if (data.length > 0) {
+            // User sudah ada, update data
+            userData.role = data[0].role;
+            await updateDoc(doc(db, "users", data[0].id), userData);
+            callback({
+                status: true,
+                message: `User registered and logged in with ${provider}`,
+                data: userData,
+            });
+        } else {
+            // User belum ada, buat data baru
+            userData.role = "member";
+            await addDoc(collection(db, "users"), userData);
+            callback({
+                status: true,
+                message: `User registered and logged in with ${provider}`,
+                data: userData,
+            });
+        }
+    } catch (error: any) {
+        // Tangani error di sini
+        callback({
+            status: false,
+            message: `Failed to register user with ${provider}`,
+        });
     }
-  } catch (error: any) {
-    // Tangani error di sini
-    callback({
-      status: false,
-      message: "Failed to register user with Google",
-    });
-  }
 }

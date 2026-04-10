@@ -1,9 +1,9 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { signIn, signInWithGoogle } from "@/utils/db/servicefirebase";
+import { signIn, signInWithOAuth } from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
-import Google from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -44,6 +44,11 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID || "",
+      clientSecret: process.env.GITHUB_SECRET || "",
+      issuer: "https://github.com/login/oauth",
+    }),
   ],
 
   callbacks: {
@@ -63,9 +68,30 @@ export const authOptions: NextAuthOptions = {
           type: account.provider,
         };
 
-        await signInWithGoogle(data, (result: any) => {
+        await signInWithOAuth("google", data, (result: any) => {
           // Pastikan mengecek result.status sesuai dengan object yang dikirim
-          console.log("signInWithGoogle result:", result);
+          console.log("signInWithOAuth result:", result);
+          if (result.status) {
+            token.fullname = result.data.fullname;
+            token.email = result.data.email;
+            token.image = result.data.image;
+            token.type = result.data.type;
+            token.role = result.data.role;
+          }
+        });
+      }
+      // Jika login dengan GitHub, tambahkan informasi yang diperlukan ke token
+      if (account?.provider === "github") {
+        const data = {
+          fullname: user.name,
+          email: user.email,
+          image: user.image,
+          type: account.provider,
+        };
+
+        await signInWithOAuth("github", data, (result: any) => {
+          // Pastikan mengecek result.status sesuai dengan object yang dikirim
+          console.log("signInWithOAuth result:", result);
           if (result.status) {
             token.fullname = result.data.fullname;
             token.email = result.data.email;

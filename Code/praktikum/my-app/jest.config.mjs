@@ -10,17 +10,20 @@ const config = {
     modulePaths: ['<rootDir>/src/'],
     collectCoverage: true,
     collectCoverageFrom: [
-        '**/*.{ts,tsx}',
-        '**/*.d.ts',
-        '!**/node_modules/**',
-        '!**/.next/**',
-        '!**/coverage/**',
-        '!**/jest.config.mjs',
-        '!**/next.config.mjs',
-        '!**/types/**',
-        '!**/views/**',
-        '!**/pages/api/**',
+        'src/pages/produk/index.tsx',
+        'src/views/product/index.tsx',
+        'src/views/produk/hero.tsx',
+        'src/views/produk/index.tsx',
+        'src/views/produk/main.tsx',
     ],
+    coverageThreshold: {
+        global: {
+            branches: 50,
+            functions: 50,
+            lines: 50,
+            statements: 50,
+        },
+    },
 }
 
 export default createJestConfig(config);

@@ -27,7 +27,7 @@ const kategori = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <TampilanProduk products={isLoading ? [] : data?.data ?? []} />
+            <TampilanProduk products={isLoading ? [] : data?.data} />
         </div>
     );
 };

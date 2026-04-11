@@ -16,9 +16,9 @@ const TampilanProduk = ({ products, isLoading = false }: { products: ProductType
         <div className={styles.produk}>
             <h1 className={styles.produk__title}>Daftar Produk</h1>
             <div className={styles.produk__content}>
-                {!isLoading ? (
+                {products?.length > 0 ? (
                     <>
-                        {products.map((products: ProductType) => (
+                        {products?.map((products: ProductType) => (
                             <Link href={`/produk/${products.id}`} key={products.id} className={styles.produk__content__item}>
 
                                 <div className={styles.produk__content__item} key={products.id}>
@@ -34,7 +34,7 @@ const TampilanProduk = ({ products, isLoading = false }: { products: ProductType
                 ) : (
                     <>
                         {[1, 2, 3].map((item) => (
-                            <div className={styles.produk__content__skeleton}>
+                            <div key={item} className={styles.produk__content__skeleton}>
                                 <div className={styles.produk__content__skeleton__image}></div>
                                 <div className={styles.produk__content__skeleton__name}></div>
                                 <div className={styles.produk__content__skeleton__category}></div>

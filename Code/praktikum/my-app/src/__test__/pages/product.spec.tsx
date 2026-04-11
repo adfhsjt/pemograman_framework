@@ -1,0 +1,27 @@
+import { render, screen } from '@testing-library/react';
+import TampilanProduk from '@/views/produk';
+
+jest.mock('next/image', () => ({
+    useRouter() {
+        return {
+            route: "/product",
+            pathname: "",
+            query: {},
+            asPath: "",
+            push: jest.fn(),
+            event: {
+                on: jest.fn(),
+                off: jest.fn()
+            },
+            isReady: true,
+        }
+    }
+}))
+
+describe("Product Page", () => {
+    it("renders product page correctly", () => {
+        const page = render(<TampilanProduk/>)
+        expect(screen.getByTestId("title").textContent).toBe("Daftar Produk");
+        expect(page).toMatchSnapshot();
+    })
+})

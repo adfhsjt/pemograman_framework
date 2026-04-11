@@ -6,7 +6,9 @@ exports[`AboutPage renders about page correctly 1`] = `
   "baseElement": <body>
     <div>
       <div>
-        <h1>
+        <h1
+          data-testid="title"
+        >
           Ini Adalah Halaman About
         </h1>
       </div>
@@ -14,7 +16,9 @@ exports[`AboutPage renders about page correctly 1`] = `
   </body>,
   "container": <div>
     <div>
-      <h1>
+      <h1
+        data-testid="title"
+      >
         Ini Adalah Halaman About
       </h1>
     </div>

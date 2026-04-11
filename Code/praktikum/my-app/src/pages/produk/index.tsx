@@ -5,15 +5,15 @@ import useSWR from "swr";
 import fetcher from "../../utils/swr/fetcher";
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const kategori = () => {
-    const [isLogin, setsLogin] = useState(false);
-    useEffect(() => {
-        // Redirect ke halaman login jika belum login
-        if (!isLogin) {
-            window.location.href = "/auth/login";
-        }
-    }, [isLogin]);
-    const {push} = useRouter();
-    const [products, setProducts] = useState([]);
+    // const [isLogin, setsLogin] = useState(false);
+    // useEffect(() => {
+    //     // Redirect ke halaman login jika belum login
+    //     if (!isLogin) {
+    //         window.location.href = "/auth/login";
+    //     }
+    // }, [isLogin]);
+    // const {push} = useRouter();
+    // const [products, setProducts] = useState([]);
     // Menggunakan SWR 
     const {data, error, isLoading} = useSWR("/api/produk", fetcher);
     

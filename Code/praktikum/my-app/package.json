@@ -25,8 +25,12 @@
     "typescript": "5.9.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/bcrypt": "^6.0.0",
     "autoprefixer": "^10.4.27",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.19"
   }

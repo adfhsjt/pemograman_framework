@@ -2,8 +2,6 @@ import Script from "next/script";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-const gaId = process.env.NEXT_PUBLIC_GA_ID;
-
 declare global {
     interface Window {
         gtag?: (...args: unknown[]) => void;
@@ -12,6 +10,7 @@ declare global {
 
 const Analytics = () => {
     const router = useRouter();
+    const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
     useEffect(() => {
         if (!gaId) return;
@@ -27,7 +26,7 @@ const Analytics = () => {
         return () => {
             router.events.off("routeChangeComplete", handleRouteChange);
         };
-    }, [router.events]);
+    }, [gaId, router.events]);
 
     if (!gaId) return null;
 

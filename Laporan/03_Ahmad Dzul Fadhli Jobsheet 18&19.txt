@@ -1,0 +1,317 @@
+LAPORAN JOBSHEET 18: OPTIMIZE MATKUL PEMOGRAMAN BERBASIS NETWORK 
+AHMAD DZUL FADHLI HANNAN | TI3F | 2341720106
+PRAKTIKUM 1 - IMAGE OPTIMIZATION
+A. Optimasi Gambar Lokal (Public Folder)
+Studi Kasus:
+Mengganti tag <img> pada halaman 404 dengan next/image. Langkah:
+Buka file src/pages/404.tsx
+Modifikasi line 7 menjadi line 8-11
+
+Hasil:
+
+• Warning hilang
+• Image dioptimasi otomatis
+• Mengurangi bandwidth
+• Mendukung lazy loading otomatis
+B. Optimasi Gambar Remote (External URL)
+Buka file views/product/index.tsx
+Modifikasi file index.tsx
+
+
+Diset length > 10 karena ada data yg isinya cuma http sehingga muncul error karena image tidak terender.
+Note : dikarenakan gambar diambil dari url tertentu maka konfigurasi berbeda
+Buka file next.config.js
+
+Hasil:
+
+• Gambar di-proxy melalui /_next/image
+• Performa lebih optimal
+• Kompresi otomatis
+PRAKTIKUM 2 - FONT OPTIMIZATION
+A. Menggunakan next/font
+Buka file index.tsx pada folder Appshell/index.tsx dan modifkasi
+
+
+
+Jalankan browser localhost:3000/produk maka font akan berubah menjadi roboto
+untuk mengecek fontnya bisa menggunakan extension FontFinder
+
+Hasil:
+• Tidak perlu load dari CDN manual
+• Tidak blocking render
+• Performance meningkat
+• Tidak terjadi FOUT (Flash of Unstyled Text)
+PRAKTIKUM 3 - SCRIPT OPTIMIZATION
+B. Menggunakan next/script
+Buka file index.tsx pada folder layouts/Navbar dan modifikasi
+
+
+Pada kasus diatas kita merubah line 11 menggunakan model Typescript dapat terlihat ketika kita refresh web produk tulisan myApp akan terlihat berkedip
+Perbedaan mendasar antara Line 11-13 dan Line 15-18 pada file index.tsx Anda terletak pada metode rendering teks dan interaksi dengan DOM (Document Object Model). Berikut adalah rincian perbedaannya:
+I. Metode Rendering
+a. Line 11-13 (Standard React/JSX): Ini adalah cara standar React. Teks "MyApp" ditulis langsung di dalam tag div. React akan langsung merender teks ini ke dalam HTML saat komponen dimuat.
+b. Line 15-18 (Next.js Script & Manual DOM): Menggunakan komponen <Script> dari Next.js dengan strategi lazyOnload. Teks tidak ada di dalam HTML saat awal dimuat, melainkan baru "disuntikkan" secara manual menggunakan perintah JavaScript document.getElementById('title').innerHTML = 'MyApp'; setelah script tersebut diunduh di latar belakang.
+II. Performa dan SEO
+a. Line 11-13: Sangat baik untuk SEO karena teks "MyApp" langsung terbaca oleh robot pencari (crawler) dalam kode sumber HTML.
+b. Line 15-18: Kurang baik untuk SEO untuk konten penting karena teks baru muncul setelah JavaScript dijalankan. Strategi lazyOnload berarti script ini dijalankan paling akhir setelah semua sumber daya utama selesai dimuat, sehingga mungkin ada jeda waktu (delay) sebelum teks muncul di layar.
+III. Keamanan (XSS)
+a. Line 11-13: Aman karena React secara otomatis melakukan escape pada string untuk mencegah serangan Cross-Site Scripting (XSS).
+b. Line 15-18: Memiliki risiko keamanan lebih tinggi karena menggunakan .innerHTML. Jika data yang dimasukkan berasal dari input user, ini bisa dimanfaatkan untuk menyuntikkan skrip berbahaya.
+C. Strategi Script
+Strategy FungsibeforeInteractive Sebelum halaman interaktifafterInteractive Setelah halaman interaktiflazyOnload Setelah semua selesaiworker Web workerHasil:
+• Script tidak blocking
+• Cocok untuk Google Analytics
+• Performa lebih ringan
+PRAKTIKUM 4 - OPTIMASI AVATAR DENGAN NEXT/IMAGE
+Buka file index.tsx pada folder layouts/navbar dan modifikasi :
+
+
+Tambahkan hostname Google dan Github:
+
+TUGAS PRAKTIKUM
+1. Optimasi semua image di project menggunakan next/image
+1. src/components/layouts/navbar/index.tsx
+
+2. src/views/lapar/index.tsx
+
+3. src/views/DetailProduct/index.tsx
+
+4. src/views/produk/main.tsx
+
+5. src/views/lapar/lapar/main.tsx
+
+6. src/pages/404.tsx
+
+7. src/views/product/index.tsx
+
+2. Gunakan minimal 1 font dari next/font
+/Appshell/index.tsx
+
+Menggunakan Roboto
+3. Tambahkan script Google Analytics menggunakan next/script
+Tambahkan /components/analytics/Analytics.tsx
+
+4. Terapkan dynamic import pada minimal 1 komponen
+
+5. Dokumentasikan perubahan performa (screenshot Lighthouse)
+Note: Untuk perbandingan agar adil:
+- pada branch pertemuan-6 sebagai patokan kondisi sebelum optimasi dan branch pertemuan-7 sebagai patokan kondisi setelah optimasi, 
+- semua ekstensi browser mati, 
+- route ke /produk, 
+- untuk platform yg digunakan adalah desktop.
+- Pada env.local NEXT_PUBLIC_GA_ID= dihapus 
+Sebelum
+
+Sesudah
+
+Kesimpulan
+Optimasi yang dilakukan berhasil meningkatkan performa halaman /produk, meskipun peningkatannya tidak terlalu besar. Skor Lighthouse naik dari 95 menjadi 96.
+Beberapa metrik menunjukkan perbaikan:
+* LCP turun dari 1.4s menjadi 1.3s 
+* TTI turun dari 1.4s menjadi 1.3s 
+* CLS sedikit lebih stabil, dari 0.049 menjadi 0.048 
+* TBT tetap sangat baik di angka 0 ms
+
+REFLEKSI & DISKUSI
+1. Mengapa <img> biasa tidak optimal?
+Karena gambar yang tidak terkompresi dengan baik atau tidak menggunakan teknik seperti lazy loading dapat memperlambat waktu muat halaman.
+2. Apa perbedaan font CDN dan next/font?
+Font CDN mengambil file font dari server eksternal saat runtime, sedangkan next/font mengelola, mengoptimasi, dan menyajikan font langsung dari aplikasi agar lebih cepat dan konsisten.
+3. Mengapa script bisa membuat website lambat?
+Karena menambah beban download, parsing, dan eksekusi JavaScript di main thread saat halaman dimuat.
+4. Kapan harus menggunakan dynamic import?
+Saat komponen atau library tidak dibutuhkan di initial render agar bundle awal lebih kecil dan waktu muat awal lebih cepat.
+5. Apa dampak bundle size terhadap UX?
+Bundle size yang besar memperburuk UX karena meningkatkan waktu loading, menghambat interaksi awal, dan membuat aplikasi terasa lambat terutama di perangkat atau jaringan lemah.
+KESIMPULAN
+Dalam praktikum ini mahasiswa telah mempelajari:
+? Image Optimization 
+? Remote Image Configuration 
+? Font Optimization 
+? Script Optimization 
+? Dynamic Import 
+? Lazy Loading
+Semua fitur ini merupakan keunggulan utama Next.js dalam meningkatkan performa aplikasi modern.
+
+
+
+LAPORAN JOBSHEET 19: UNIT TESTING MATKUL PEMOGRAMAN BERBASIS NETWORK 
+AHMAD DZUL FADHLI HANNAN | TI3F | 2341720106
+PRAKTIKUM 1 - SETUP JEST DI NEXT.JS
+Langkah 1- Install Dependencies
+Jalankan:
+npm install jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom --save-dev --force
+
+Langkah 2 - Buat File Konfigurasi
+Doc : https://nextjs.org/docs/pages/guides/testing/jest
+Buat file:
+o jest.config.mjs
+Isi dengan:
+
+Langkah 3 - Tambahkan Script di package.json
+
+PRAKTIKUM 2 - STRUKTUR FOLDER TESTING
+Buat folder:
+src/__test__/
+Struktur contoh:
+src
++-- pages
++-- components
++-- views
++-- __test__
++-- pages
++-- components
+
+PRAKTIKUM 3 - TESTING HALAMAN ABOUT
+Langkah 1 - Buat File Testing
+src/__test__/pages/about.spec.tsx
+
+Langkah 2 - Contoh Testing Snapshot. Pada about.spec.tsx tambahkan code berikut :
+
+Langkah 3 - Jalankan Testing
+• npm run test
+• Jika berhasil:
+• PASS about.spec.tsx
+
+PRAKTIKUM 4 - COVERAGE REPORT
+Jalankan:
+o npm run test:coverage
+
+Akan muncul folder:
+o coverage/
+o Buka:
+? coverage/lcov-report/index.html ( buka di melalui explorer)
+
+Target perusahaan biasanya:
+
+Minimum 80% coverage
+PRAKTIKUM 5 - KONFIGURASI COVERAGE LENGKAP
+Update jest.config.mjs:
+
+Jalankan npm run test:coverage
+
+Jika dilihat di index.htmlnya
+
+PRAKTIKUM 6 - TESTING DENGAN GETBYTESTID
+Tambahkan pada About Page
+• <h1 data-testid="title">About Page</h1>
+
+Update Testing pada about.spec.tsx
+
+Dicoba untuk di run
+
+Coba Jika dibuat Salah:
+- Rubah menjadi toBe("About")
+
+Jalan kan dan Hasil:
+o FAIL
+Expected: "About"
+Received: " Ini Adalah Halaman About"
+
+PRAKTIKUM 7 - TESTING PAGE DENGAN ROUTER (MOCKING)
+Kita coba untuk melakukan testing pada halaman produk
+Buat file /__test__/pages/product.spec.tsx
+Tambahkan kode berikut
+
+Ketika testing halaman Product, sering muncul error:
+• NextRouter was not mounted
+
+Solusi: Mock Next Router
+Tambahkan di file product.spec.tsx
+
+PRAKTIKUM 8 - MENANGANI UNDEFINED DATA
+Jalankan npm run test:coverage maka akan muncul error
+
+Jika muncul error:
+o Cannot read properties of undefined
+o Perbaiki di komponen:
+Pada file index.tsx pada folder pages/produk
+
+Jalankan npm run test:coverage maka akan muncul error
+
+Maka Solusinya perbaiki code pada file
+
+Note pastikan : comment pada code berikut pada 2 code testing
+
+
+Hasil npm run test:coverage
+
+ANALISIS COVERAGE
+
+Jika dilihat aplikasi yang dibuat masih 5% jadi perlu banyak perbaikan sebelum proses deploy.
+Perhatikan bagian:
+• Statement
+• Branch
+• Function
+• Lines
+Contoh:
+Metric HasilStatements 85%Branch 60%Functions 90%Lines 88%Branch biasanya paling sulit karena perlu menguji kondisi if/else.
+STANDAR INDUSTRI
+Biasanya:
+• = 80% ? boleh production
+• < 80% ? harus diperbaiki
+• Semua critical feature wajib dites
+
+TUGAS PRAKTIKUM
+1. Buat unit test untuk:
+o Halaman Product
+o 1 Komponen
+Product
+
+Hero
+
+Hasil
+
+
+2. Gunakan minimal:
+o 1 Snapshot test
+o 1 toBe()
+o 1 getByTestId()
+About
+
+Unit test about
+
+Halaman product
+
+Unit test product
+
+Komponen Hero
+
+Unit test hero
+
+Hasil
+
+
+3. Buat coverage minimal 50%
+Modifikasi jest.config.mjs
+
+Hasil
+
+
+4. Lakukan mocking untuk router
+Unit test halaman produk
+
+5. Dokumentasikan hasil coverage
+
+
+Note: Setelah saya modifikasi pada tugas nomor 4.
+
+DISKUSI & REFLEKSI
+1. Mengapa unit testing penting sebelum production?
+Membantu menangkap bug lebih awal, menjaga stabilitas fitur, dan mencegah regresi saat ada perubahan kode.
+2. Mengapa branch coverage sulit mencapai 100%?
+Karena tidak semua jalur logika mudah dipicu, terutama kondisi edge case, error path, dan skenario yang bergantung environment tertentu.
+3. Apa itu mocking?
+Teknik mengganti dependensi asli (seperti API, router, atau database) dengan versi tiruan agar test fokus pada unit yang diuji.
+4. Kapan snapshot test digunakan?
+Snapshot test digunakan saat ingin memverifikasi output render UI tetap konsisten dari waktu ke waktu dan mendeteksi perubahan tampilan yang tidak disengaja.
+5. Apakah semua file harus dites?
+Tidak semua file harus dites secara langsung, tetapi file yang berisi logika penting, alur bisnis, dan komponen kritis sebaiknya memiliki cakupan test yang memadai.
+KESIMPULAN
+Dalam praktikum ini mahasiswa telah:
+? Menginstal dan mengkonfigurasi Jest 
+? Menggunakan React Testing Library 
+? Membuat unit test pada pages 
+? Menghasilkan coverage report 
+? Melakukan mocking router 
+? Memahami pentingnya testing di industri

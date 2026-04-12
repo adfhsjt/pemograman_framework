@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Document Page renders document structure correctly 1`] = `"<html lang="id"><head></head><body><main data-testid="main-content"></main><script data-testid="next-script"></script></body></html>"`;

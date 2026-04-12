@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Category Page renders category page correctly 1`] = `
+<div>
+  <div>
+    <h1>
+      Halaman Category
+    </h1>
+    <ol>
+      Category:
+      <li>
+        1
+        . 
+        panganan
+      </li>
+    </ol>
+  </div>
+</div>
+`;

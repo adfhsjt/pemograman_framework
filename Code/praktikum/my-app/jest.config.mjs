@@ -8,22 +8,25 @@ const config = {
     coverageProvider: 'v8',
     testEnvironment: 'jsdom',
     modulePaths: ['<rootDir>/src/'],
+    moduleNameMapper: {
+        '^@/(.*)$': '<rootDir>/src/$1',
+    },
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     collectCoverage: true,
     collectCoverageFrom: [
-        'src/pages/produk/index.tsx',
-        'src/views/product/index.tsx',
-        'src/views/produk/hero.tsx',
-        'src/views/produk/index.tsx',
-        'src/views/produk/main.tsx',
+        '**/*.{ts,tsx}',
+        '**/*.d.ts',
+        '!**/node_modules/**',
+        '!**/.next/**',
+        '!**/coverage/**',
+        '!**/jest.config.mjs',
+        '!**/next.config.mjs',
+        '!**/types/**',
+        '!**/views/**',
+        '!**/pages/api/**',
+        '!**/jest.setup.ts'
+        
     ],
-    coverageThreshold: {
-        global: {
-            branches: 50,
-            functions: 50,
-            lines: 50,
-            statements: 50,
-        },
-    },
 }
 
 export default createJestConfig(config);

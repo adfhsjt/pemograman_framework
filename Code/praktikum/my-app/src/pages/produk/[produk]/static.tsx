@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: { produk: string } }) {
     const res = await fetch(`http://localhost:3000/api/products/${params?.produk}`);
     // const response: ProductType[] = await res.json();
-    const response: { data: ProductType[] } = await res.json();
+    const response: { data: ProductType } = await res.json();
 
     console.log("Data produk yang diambil dari API:", response);
     return {

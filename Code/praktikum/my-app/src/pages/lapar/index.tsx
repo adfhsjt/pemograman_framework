@@ -1,25 +1,25 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import TampilanLapar from "../../views/lapar";
-import useSWR from "swr";
-import fetcher from "../../utils/swr/fetcher";
-// const fetcher = (url: string) => fetch(url).then((res) => res.json());
-const kategori = () => {
-    // const [isLogin, setsLogin] = useState(false);
-    // const {push} = useRouter();
-    const [lapars, setLapars] = useState([]);
-    // Menggunakan SWR 
-    const {data, error, isLoading} = useSWR("http://localhost:3000/api/lapar", fetcher);
-    
-    // cek apakah data, error, atau isLoading sudah benar
-    console.log("Data:", data);
-    // console.log("Error:", error);
-    // console.log("Is Loading:", isLoading);
+import { LaparType } from "../../types/Lapar.type";
 
+const halamanLaparServer = (props: { lapars: LaparType[] }) => {
+    const { lapars } = props;
     return (
-        <div className="container mx-auto p-4">
-            <TampilanLapar lapars={data?.data || []} isLoading={isLoading} />
+        <div>
+            <h1 className="font-bold text-3xl pl-4">Halaman Lapar Server</h1>
+            <TampilanLapar lapars={lapars}/>
         </div>
-    );
-};
-export default kategori;
+    )
+}
+export default halamanLaparServer;
+
+// Fungsi getServerSideProps akan dipanggil setiap kali halaman ini diakses, dan akan mengambil data lapar dari API sebelum merender halaman.
+export async function getServerSideProps() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lapar`);
+    const response = await res.json();
+    // console.log("Data lapar yang diambil dari API", response);
+    return {
+        props: {
+            lapars: response.data,
+        },
+    }
+}

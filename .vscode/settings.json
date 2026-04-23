@@ -1,0 +1,11 @@
+{
+    "codesnap.boxShadow": "rgba(0, 0, 0, 1) 0px 0px 0px 1px",
+    "codesnap.containerPadding": "3px",
+    "codesnap.transparentBackground": false,
+    "codesnap.showWindowTitle": true,
+    "codesnap.realLineNumbers": true,
+    "codesnap.backgroundColor": "#ffffff",
+    "codesnap.showWindowControls": true,
+    "codesnap.target": "container",
+    "codesnap.shutterAction": "copy"
+}
